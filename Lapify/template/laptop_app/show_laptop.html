@@ -6,7 +6,37 @@
 </head>
 <body>
 
-{{laptop}}
+<table>
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>COMPANY</td>
+        <td>RAM</td>
+        <td>STORAGE</td>
+        <td>COLOR</td>
+        <td>STOCK</td>
+        <td>PRICE</td>
+        <td>REMARK</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for lap in laptop %}
+    <tr>
+        <td>{{lap.id}}</td>
+        <td>{{lap.company}}</td>
+        <td>{{lap.ram}}</td>
+        <td>{{lap.storage}}</td>
+        <td>{{lap.color}}</td>
+        <td>{{lap.stock}}</td>
+        <td>{{lap.price}}</td>
+        <td>
+            <a href="{% url 'update' lap.id %}">Update</a>
+            <a href="{% url 'delete' lap.id %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor%}
+    </tbody>
+</table>
 
 </body>
 </html>
