@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layout.html' %}
 
-<table>
+
+
+{% block title %}
+    <title>Title</title>
+    {% endblock%}
+
+
+
+
+{% block content %}
+<table class="table table-striped-columns" style="width:80%; margin-left:10%">
     <thead>
+    <h3 class="text-center">Available Stock</h3>
     <tr>
-        <td>ID</td>
-        <td>COMPANY</td>
-        <td>RAM</td>
-        <td>STORAGE</td>
-        <td>COLOR</td>
-        <td>STOCK</td>
-        <td>PRICE</td>
-        <td>REMARK</td>
+        <th>ID</th>
+        <th>COMPANY</th>
+        <th>RAM</th>
+        <th>STORAGE</th>
+        <th>COLOR</th>
+        <th>STOCK</th>
+        <th>PRICE</th>
+        <th>REMARK</th>
     </tr>
     </thead>
     <tbody>
@@ -30,13 +35,13 @@
         <td>{{lap.stock}}</td>
         <td>{{lap.price}}</td>
         <td>
-            <a href="{% url 'update' lap.id %}">Update</a>
-            <a href="{% url 'delete' lap.id %}">Delete</a>
+            <a class="btn btn-warning btn-sm" href="{% url 'update' lap.id %}">Update</a>
+             <a class="btn btn-danger btn-sm" href="{% url 'delete' lap.id %}">Delete</a>
         </td>
     </tr>
     {% endfor%}
     </tbody>
 </table>
 
-</body>
-</html>
+{% endblock%}
+

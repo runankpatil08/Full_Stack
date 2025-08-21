@@ -8,6 +8,7 @@ def add_view(request):
         form=LaptopForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('show')
     template_name='laptop_app/add_laptop.html'
     context={"form":form}
     return render(request, template_name, context)
