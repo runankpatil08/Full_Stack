@@ -1,47 +1,90 @@
 {% extends 'layout.html' %}
 
-
-
 {% block title %}
-    <title>Title</title>
-    {% endblock%}
-
-
-
+<title>Available Stock</title>
+{% endblock %}
 
 {% block content %}
-<table class="table table-striped-columns" style="width:80%; margin-left:10%">
-    <thead>
-    <h3 class="text-center">Available Stock</h3>
-    <tr>
-        <th>ID</th>
-        <th>COMPANY</th>
-        <th>RAM</th>
-        <th>STORAGE</th>
-        <th>COLOR</th>
-        <th>STOCK</th>
-        <th>PRICE</th>
-        <th>REMARK</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for lap in laptop %}
-    <tr>
-        <td>{{lap.id}}</td>
-        <td>{{lap.company}}</td>
-        <td>{{lap.ram}}</td>
-        <td>{{lap.storage}}</td>
-        <td>{{lap.color}}</td>
-        <td>{{lap.stock}}</td>
-        <td>{{lap.price}}</td>
-        <td>
-            <a class="btn btn-warning btn-sm" href="{% url 'update' lap.id %}">Update</a>
-             <a class="btn btn-danger btn-sm" href="{% url 'delete' lap.id %}">Delete</a>
-        </td>
-    </tr>
-    {% endfor%}
-    </tbody>
-</table>
 
-{% endblock%}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12">
 
+      <!-- Card Layout -->
+      <div class="card shadow-lg border-0 rounded-4">
+
+        <!-- Card Header -->
+        <div class="card-header text-center text-white rounded-top-4"
+             style="background: linear-gradient(135deg, #6c63ff, #3f3d9e);">
+          <h3 class="mb-0 fw-bold">
+            <i class="bi bi-laptop-fill me-2"></i> Available Stock
+          </h3>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body p-4">
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle text-center">
+              <thead class="table-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Company</th>
+                  <th>RAM</th>
+                  <th>Storage</th>
+                  <th>Color</th>
+                  <th>Stock</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for lap in laptop %}
+                <tr>
+                  <td>{{ lap.id }}</td>
+                  <td class="fw-semibold">{{ lap.company }}</td>
+                  <td>{{ lap.ram }} GB</td>
+                  <td>{{ lap.storage }} GB</td>
+                  <td>
+                    <span class="badge rounded-pill"
+                          style="background-color: {{ lap.color|default:'#6c757d' }};">
+                      {{ lap.color }}
+                    </span>
+                  </td>
+                  <td>
+                    {% if lap.stock > 0 %}
+                      <span class="badge bg-success px-3 py-2">In Stock</span>
+                    {% else %}
+                      <span class="badge bg-danger px-3 py-2">Out of Stock</span>
+                    {% endif %}
+                  </td>
+                  <td><strong>₹{{ lap.price }}</strong></td>
+                  <td>
+                    <a class="btn btn-warning btn-sm shadow-sm" href="{% url 'update' lap.id %}">
+                      <i class="bi bi-pencil-square"></i> Update
+                    </a>
+                    <a class="btn btn-danger btn-sm shadow-sm" href="{% url 'delete' lap.id %}">
+                      <i class="bi bi-trash3"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Add New Button -->
+          <div class="text-center mt-4">
+            <a class="btn btn-primary px-4 py-2 shadow-sm" href="{% url 'add' %}">
+              <i class="bi bi-plus-circle me-1"></i> Add New
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

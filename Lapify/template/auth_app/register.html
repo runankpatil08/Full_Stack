@@ -1,0 +1,98 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+{% block title%}
+<title>Register</title>
+{% endblock%}
+
+{% block content %}
+
+<!-- Background Bubble Animation -->
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #f8f9fa, #e0e7ff, #f0f0f0);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Bubble Styles */
+  .bubble {
+    position: absolute; /* not sticky, not fixed */
+    bottom: -100px;
+    background: rgba(108, 99, 255, 0.2);
+    border-radius: 50%;
+    animation: rise 20s linear infinite;
+  }
+
+  @keyframes rise {
+    from { transform: translateY(0) scale(1); opacity: 1; }
+    to { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+  }
+
+  .card {
+    z-index: 10;
+    position: relative;
+  }
+</style>
+
+<!-- Floating Bubbles -->
+<div class="bubble" style="left:10%; width:40px; height:40px; animation-delay:0s;"></div>
+<div class="bubble" style="left:30%; width:60px; height:60px; animation-delay:4s;"></div>
+<div class="bubble" style="left:50%; width:30px; height:30px; animation-delay:2s;"></div>
+<div class="bubble" style="left:70%; width:50px; height:50px; animation-delay:6s;"></div>
+<div class="bubble" style="left:90%; width:20px; height:20px; animation-delay:8s;"></div>
+
+<!-- Registration Form -->
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="card shadow-lg p-4" style="width: 450px; border-radius: 15px; background:#ffffff; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+
+    <h2 class="text-center mb-4" style="color:#6c63ff; font-family: 'Poppins', sans-serif; font-weight: 600;">
+      📝 Register Here
+    </h2>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+
+      <div class="d-grid gap-2 mt-3">
+        <button class="btn btn-success" style="transition: transform 0.2s;">Submit</button>
+        <button class="btn btn-warning" type="reset" style="transition: transform 0.2s;">Reset</button>
+      </div>
+
+      <p class="text-center mt-3">
+        <a href="{% url 'login' %}" style="text-decoration:none; color:#6c63ff; font-weight: bold;">
+          🔑 Already have an account?
+        </a>
+      </p>
+    </form>
+
+  </div>
+</div>
+
+<!-- Extra CSS -->
+<style>
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: #6c63ff !important;
+    box-shadow: 0 0 8px rgba(108,99,255,0.4) !important;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    transform: scale(1.05);
+  }
+</style>
+
+{% endblock %}
