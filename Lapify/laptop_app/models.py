@@ -7,4 +7,5 @@ class Laptop(models.Model):
     color=models.CharField(max_length=20)
     stock=models.IntegerField()
     price=models.IntegerField()
+    image = models.ImageField(upload_to='image', null=True, blank=True)
 

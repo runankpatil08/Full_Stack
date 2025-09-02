@@ -29,7 +29,7 @@ def contact_view(request):
 def add_view(request):
     form=LaptopForm()
     if request.method=="POST":
-        form=LaptopForm(request.POST)
+        form=LaptopForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'add successful')
@@ -51,7 +51,7 @@ def update_view(request,id):
     laptop=Laptop.objects.get(id=id)
     form=LaptopForm(instance=laptop)
     if request.method=="POST":
-        form=LaptopForm(request.POST,instance=laptop)
+        form=LaptopForm(request.POST,request.FILES,instance=laptop)
         if form.is_valid():
             form.save()
             messages.warning(request, 'Update successful')
