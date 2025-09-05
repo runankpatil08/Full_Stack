@@ -6,11 +6,29 @@
 
 {% block content %}
 
+<style>
+  /* Hover effect for cards */
+  .hover-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .hover-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Hidden details */
+  .extra-details {
+    display: none;
+    margin-top: 10px;
+  }
+</style>
+
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-12">
 
-      <!-- Card Layout -->
+      <!-- Outer Card -->
       <div class="card shadow-lg border-0 rounded-4">
 
         <!-- Card Header -->
@@ -24,68 +42,75 @@
         <!-- Card Body -->
         <div class="card-body p-4">
 
-          <div class="table-responsive">
-            <table class="table table-hover align-middle text-center">
-              <thead class="table-dark">
-                <tr>
-                  <th>ID</th>
-                  <th>Image</th>
-                  <th>Company</th>
-                  <th>RAM</th>
-                  <th>Storage</th>
-                  <th>Color</th>
-                  <th>Stock</th>
-                  <th>Price</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for lap in laptop %}
-                <tr>
-                  <td>{{ lap.id }}</td>
-                  <td>
-                    {% if lap.image %}
-                    <img src="{{ lap.image.url }}" alt="{{ lap.name }}" style="max-width: 300px;">
+          <!-- Grid of Cards -->
+          <div class="row g-4">
+            {% for lap in laptop %}
+              <div class="col-md-4 col-sm-6">
+                <!-- Alternate background colors with hover -->
+                <div class="card h-100 shadow-sm rounded-3 hover-card
+                     {% if forloop.counter|divisibleby:2 %}
+                       bg-light
                      {% else %}
-                     <p>No image uploaded.</p>
-                      {% endif %}
+                       bg-white
+                     {% endif %}">
 
-                  </td>
+                  <!-- Image -->
+                  {% if lap.image %}
+                    <img src="{{ lap.image.url }}" alt="{{ lap.name }}"
+                         class="card-img-top"
+                         style="height:200px; object-fit:cover; border-radius:8px 8px 0 0;">
+                  {% else %}
+                    <img src="https://via.placeholder.com/200"
+                         class="card-img-top"
+                         style="border-radius:8px 8px 0 0;"
+                         alt="No image">
+                  {% endif %}
 
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <h5 class="card-title fw-bold">{{ lap.company }}</h5>
+                    <p class="card-text mb-1"><strong>RAM:</strong> {{ lap.ram }} GB</p>
+                    <p class="card-text mb-1"><strong>Storage:</strong> {{ lap.storage }} GB</p>
+                    <p class="card-text mb-1"><strong>Color:</strong> {{ lap.color }}</p>
 
-                  <td class="fw-semibold">{{ lap.company }}</td>
-                  <td>{{ lap.ram }} GB</td>
-                  <td>{{ lap.storage }} GB</td>
-                  <td>
-                    <span class="badge rounded-pill"
-                          style="background-color: {{ lap.color|default:'#6c757d' }};">
-                      {{ lap.color }}
-                    </span>
-                  </td>
-                  <td>
                     {% if lap.stock > 0 %}
                       <span class="badge bg-success px-3 py-2">In Stock</span>
                     {% else %}
                       <span class="badge bg-danger px-3 py-2">Out of Stock</span>
                     {% endif %}
-                  </td>
-                  <td><strong>₹{{ lap.price }}</strong></td>
-                  <td>
-                    <a class="btn btn-warning btn-sm shadow-sm" href="{% url 'update' lap.id %}">
+
+                    <p class="card-text mt-2"><strong>Price:</strong> ₹{{ lap.price }}</p>
+
+                    <!-- Extra hidden details -->
+                    <div class="extra-details">
+                      <p class="card-text"><strong>Processor:</strong>925</p>
+                      <p class="card-text"><strong>Graphics:</strong>4D</p>
+                      <p class="card-text"><strong>Screen Size:</strong>24 inch</p>
+                      <p class="card-text"><strong>Battery:</strong> 20000mAh</p>
+                    </div>
+
+                    <!-- Show More button -->
+                    <button class="btn btn-link p-0 mt-2 toggle-btn" type="button">
+                      Show More
+                    </button>
+                  </div>
+
+                  <!-- Card Footer -->
+                  <div class="card-footer bg-transparent d-flex justify-content-between">
+                    <a class="btn btn-warning btn-sm" href="{% url 'update' lap.id %}">
                       <i class="bi bi-pencil-square"></i> Update
                     </a>
-                    <a class="btn btn-danger btn-sm shadow-sm" href="{% url 'delete' lap.id %}">
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete' lap.id %}">
                       <i class="bi bi-trash3"></i> Delete
                     </a>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
           </div>
 
           <!-- Add New Button -->
-          <div class="text-center mt-4">
+          <div class="text-center mt-5">
             <a class="btn btn-primary px-4 py-2 shadow-sm" href="{% url 'add' %}">
               <i class="bi bi-plus-circle me-1"></i> Add New
             </a>
@@ -97,5 +122,24 @@
     </div>
   </div>
 </div>
+
+<!-- JavaScript for toggling -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".toggle-btn");
+    buttons.forEach(btn => {
+      btn.addEventListener("click", function () {
+        const details = this.previousElementSibling; // extra-details div
+        if (details.style.display === "none" || details.style.display === "") {
+          details.style.display = "block";
+          this.textContent = "Show Less";
+        } else {
+          details.style.display = "none";
+          this.textContent = "Show More";
+        }
+      });
+    });
+  });
+</script>
 
 {% endblock %}

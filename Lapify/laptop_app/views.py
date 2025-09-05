@@ -4,6 +4,8 @@ from .models import Laptop
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+from django.core.mail import send_mail
+
 
 
 
@@ -32,6 +34,14 @@ def add_view(request):
         form=LaptopForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
+            # ✅ Send email alert
+            send_mail(
+                'Test Email',
+                'Hello! Your Product has been added.',
+                'runankpatil08@gmail.com',  # From
+                ['runankpatil2001@gmail.com'],  # To
+                fail_silently=False,
+            )
             messages.success(request, 'add successful')
             return redirect('show')
     template_name='laptop_app/add_laptop.html'
@@ -54,6 +64,15 @@ def update_view(request,id):
         form=LaptopForm(request.POST,request.FILES,instance=laptop)
         if form.is_valid():
             form.save()
+
+            # ✅ Send email alert
+            send_mail(
+                'Test Email',
+                'Hello! Your Product has been updated.',
+                'runankpatil08@gmail.com',  # From
+                ['runankpatil2001@gmail.com'],  # To
+                fail_silently=False,
+            )
             messages.warning(request, 'Update successful')
             return redirect('show')
     template_name='laptop_app/add_laptop.html'
@@ -64,5 +83,14 @@ def update_view(request,id):
 def delete_view(request,id):
     laptop=Laptop.objects.get(id=id)
     laptop.delete()
+
+    # ✅ Send email alert
+    send_mail(
+        'Test Email',
+        'Hello! Your Product has been delete.',
+        'runankpatil08@gmail.com',  # From
+        ['runankpatil2001@gmail.com'],  # To
+        fail_silently=False,
+    )
     messages.error(request, 'Delete successful')
     return redirect('show')
