@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Testimonials - LapiFy</title>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+  <!-- 🌟 Animated Heading -->
+  <h1 class="text-center fw-bold mb-5 testimonials-heading">
+    🌟 What Our Customers Say
+  </h1>
+
+  <div class="row">
+    <!-- Testimonial 1 -->
+    <div class="col-md-4 mb-4">
+      <div class="card testimonial-card shadow-lg border-0 rounded-4 p-4 text-center">
+        <div class="testimonial-icon">💻</div>
+        <p class="fst-italic">"LapiFy has made managing our laptop stock so easy! I can track everything with just a few clicks."</p>
+        <h6 class="fw-bold mt-3">— Rahul Sharma, Shop Owner</h6>
+      </div>
+    </div>
+
+    <!-- Testimonial 2 -->
+    <div class="col-md-4 mb-4">
+      <div class="card testimonial-card shadow-lg border-0 rounded-4 p-4 text-center">
+        <div class="testimonial-icon">🔐</div>
+        <p class="fst-italic">"The authentication system is very secure and user-friendly. I love how smooth it works!"</p>
+        <h6 class="fw-bold mt-3">— Priya Mehta, Store Manager</h6>
+      </div>
+    </div>
+
+    <!-- Testimonial 3 -->
+    <div class="col-md-4 mb-4">
+      <div class="card testimonial-card shadow-lg border-0 rounded-4 p-4 text-center">
+        <div class="testimonial-icon">📊</div>
+        <p class="fst-italic">"Finally, a system that helps me organize laptops and check stock without confusion."</p>
+        <h6 class="fw-bold mt-3">— Amit Verma, Laptop Retailer</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Styling + Animations -->
+<style>
+/* Gradient Heading Animation */
+.testimonials-heading {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #f7971e, #ffd200, #ff512f);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 5s linear infinite;
+}
+
+/* Gradient Animation */
+@keyframes gradientMove {
+  0% { background-position: 0% center; }
+  100% { background-position: 300% center; }
+}
+
+/* Testimonial Card */
+.testimonial-card {
+  background: #fff;
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s forwards;
+}
+.testimonial-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0px 12px 25px rgba(0,0,0,0.2);
+}
+
+/* Icon Styling */
+.testimonial-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #f39c12;
+  animation: bounce 2s infinite;
+}
+
+/* Bounce Effect for Icons */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Fade-in Animation for Cards */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.testimonial-card:nth-child(1) { animation-delay: 0.2s; }
+.testimonial-card:nth-child(2) { animation-delay: 0.4s; }
+.testimonial-card:nth-child(3) { animation-delay: 0.6s; }
+</style>
+{% endblock %}

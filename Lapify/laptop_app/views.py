@@ -11,8 +11,14 @@ from django.core.mail import send_mail
 
 
 def home_view(request):
-    template_name='laptop_app/home.html'
-    context={}
+    template_name = 'laptop_app/home.html'
+
+    # Get top 3 latest laptops in stock (sorted by id descending)
+    top_laptops = Laptop.objects.filter(stock__gt=0).order_by('-id')[:3]
+
+    context = {
+        'top_laptops': top_laptops
+    }
     return render(request, template_name, context)
 
 
@@ -26,6 +32,26 @@ def contact_view(request):
     context={}
     return render(request, template_name, context)
 
+
+# ✅ New Static Pages
+
+def career_view(request):
+    template_name = 'laptop_app/career.html'
+    return render(request, template_name)
+
+def privacy_view(request):
+    template_name = 'laptop_app/privacy.html'
+    return render(request, template_name)
+
+
+def terms_view(request):
+    template_name = 'laptop_app/terms.html'
+    return render(request, template_name)
+
+
+def testimonials_view(request):
+    template_name = 'laptop_app/testimonials.html'
+    return render(request, template_name)
 
 @login_required
 def add_view(request):

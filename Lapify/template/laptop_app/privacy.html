@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Privacy Policy - LapiFy</title>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+  <!-- Gradient Heading -->
+  <h1 class="text-center fw-bold mb-4 privacy-heading">
+    🔒 Privacy Policy
+  </h1>
+
+  <!-- Animated Card -->
+  <div class="card p-4 shadow-lg border-0 rounded-4 privacy-card">
+    <p class="lead">
+      At <strong>LapiFy</strong>, we respect your privacy and are committed to protecting your personal information.
+      This Privacy Policy explains how we collect, use, and safeguard your data when you use our services.
+    </p>
+
+    <!-- Section 1 -->
+    <h4 class="mt-4 section-title">1. Information We Collect</h4>
+    <ul class="styled-list">
+      <li>Usernames, emails, and login details.</li>
+      <li>Details of laptops you manage in your stock.</li>
+      <li>Basic contact details if you reach out to us.</li>
+    </ul>
+
+    <!-- Section 2 -->
+    <h4 class="mt-4 section-title">2. How We Use Information</h4>
+    <ul class="styled-list">
+      <li>To provide secure authentication and account management.</li>
+      <li>To help you manage your laptop stock efficiently.</li>
+      <li>To improve our system and provide better service.</li>
+    </ul>
+
+    <!-- Section 3 -->
+    <h4 class="mt-4 section-title">3. Data Protection</h4>
+    <p class="text-muted">
+      Your information is securely stored and not shared with third parties, except as required by law.
+    </p>
+
+    <!-- Last updated -->
+    <p class="mt-4 text-end fw-bold">
+      <em>📅 Last Updated: September 2025</em>
+    </p>
+  </div>
+</div>
+
+<!-- ✅ Styling + Animations -->
+<style>
+/* Gradient Heading Animation */
+.privacy-heading {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #6a11cb, #2575fc, #ff416c);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 5s linear infinite;
+}
+
+/* Gradient Animation */
+@keyframes shine {
+  0% { background-position: 0% center; }
+  100% { background-position: 300% center; }
+}
+
+/* Card hover effect */
+.privacy-card {
+  background: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.privacy-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 12px 24px rgba(0,0,0,0.2);
+}
+
+/* Section Titles with left border highlight */
+.section-title {
+  position: relative;
+  padding-left: 12px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(180deg, #6a11cb, #2575fc);
+  border-radius: 4px;
+}
+
+/* Animated list */
+.styled-list {
+  list-style: none;
+  padding-left: 0;
+}
+.styled-list li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+}
+.styled-list li::before {
+  content: "✔️";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 1.2rem;
+  color: #2575fc;
+  transition: transform 0.3s ease;
+}
+.styled-list li:hover {
+  color: #2575fc;
+  transform: translateX(5px);
+}
+.styled-list li:hover::before {
+  transform: scale(1.2) rotate(10deg);
+}
+</style>
+{% endblock %}

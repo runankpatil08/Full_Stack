@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Careers - LapiFy</title>
+{% endblock %}
+
+{% block content %}
+<!-- Include AOS library in your layout.html head or here -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<div class="container my-5">
+  <h1 class="text-center text-primary mb-5" data-aos="fade-down" data-aos-duration="1000">
+    Join Our Team at LapiFy
+  </h1>
+
+  <!-- Intro Section -->
+  <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="1000">
+    <p class="lead">
+      At <span class="fw-bold">LapiFy</span>, we’re passionate about helping businesses manage laptops smarter.
+      We’re always looking for talented and driven individuals to join our team.
+    </p>
+  </div>
+
+ <!-- Open Positions -->
+<div class="mb-5">
+  <h3 class="text-secondary mb-4 text-center" data-aos="fade-right" data-aos-duration="1000">Open Positions</h3>
+  <div class="row g-4">
+    <!-- Position Card -->
+    <div class="col-md-4" data-aos="zoom-in" data-aos-duration="1000">
+      <div class="card h-100 shadow-sm border-primary hover-light">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Software Developer</h5>
+          <p class="card-text">Full-time – Bengaluru</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4" data-aos="zoom-in" data-aos-duration="1200">
+      <div class="card h-100 shadow-sm border-success hover-light">
+        <div class="card-body">
+          <h5 class="card-title text-success">Product Manager</h5>
+          <p class="card-text">Full-time – Remote</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4" data-aos="zoom-in" data-aos-duration="1400">
+      <div class="card h-100 shadow-sm border-warning hover-light">
+        <div class="card-body">
+          <h5 class="card-title text-warning">UX/UI Designer</h5>
+          <p class="card-text">Contract – Bengaluru</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CSS for light hover -->
+<style>
+.hover-light {
+  transition: all 0.3s ease-in-out;
+}
+.hover-light:hover {
+  background-color: #f8f9fa; /* light gray background on hover */
+  transform: translateY(-5px); /* subtle lift */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* softer shadow */
+}
+</style>
+
+
+  <!-- Contact Section -->
+  <div class="text-center p-5 rounded bg-primary text-white" data-aos="fade-up" data-aos-duration="1000">
+    <h3 class="mb-3">How to Apply</h3>
+    <p class="lead mb-3">
+      Interested candidates can reach out directly via email or phone. Attach your resume with your email.
+    </p>
+    <p class="fs-5 mb-1">
+      📧 <a href="mailto:support@lapify.com" class="text-white fw-bold text-decoration-underline">support@lapify.com</a>
+    </p>
+    <p class="fs-5 mb-3">
+      📞 <strong>+91-9876543210</strong>
+    </p>
+    <p class="fst-italic">
+      Note: Include the position you are applying for in the email subject line.
+    </p>
+  </div>
+</div>
+
+<!-- Initialize AOS -->
+<script>
+  AOS.init();
+</script>
+
+<!-- Extra CSS for hover effect -->
+<style>
+.hover-shadow:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  transition: all 0.3s ease-in-out;
+}
+</style>
+{% endblock %}
