@@ -12,8 +12,15 @@
     🌟 What Our Customers Say
   </h1>
 
+  <!-- Review Button -->
+  <div class="text-center mb-5">
+    <button class="btn btn-lg btn-gradient fw-bold px-4 py-2 shadow" data-bs-toggle="modal" data-bs-target="#reviewModal">
+      ✍️ Write a Review
+    </button>
+  </div>
+
   <div class="row">
-    <!-- Testimonial 1 -->
+    <!-- ✅ Existing Static Testimonials -->
     <div class="col-md-4 mb-4">
       <div class="card testimonial-card shadow-lg border-0 rounded-4 p-4 text-center">
         <div class="testimonial-icon">💻</div>
@@ -22,7 +29,6 @@
       </div>
     </div>
 
-    <!-- Testimonial 2 -->
     <div class="col-md-4 mb-4">
       <div class="card testimonial-card shadow-lg border-0 rounded-4 p-4 text-center">
         <div class="testimonial-icon">🔐</div>
@@ -31,12 +37,51 @@
       </div>
     </div>
 
-    <!-- Testimonial 3 -->
     <div class="col-md-4 mb-4">
       <div class="card testimonial-card shadow-lg border-0 rounded-4 p-4 text-center">
         <div class="testimonial-icon">📊</div>
         <p class="fst-italic">"Finally, a system that helps me organize laptops and check stock without confusion."</p>
         <h6 class="fw-bold mt-3">— Amit Verma, Laptop Retailer</h6>
+      </div>
+    </div>
+
+    <!-- ✅ Dynamic User Reviews -->
+    {% for t in testimonials %}
+    <div class="col-md-4 mb-4">
+      <div class="card testimonial-card shadow-lg border-0 rounded-4 p-4 text-center">
+        <div class="testimonial-icon">⭐</div>
+        <p class="fst-italic text-dark">"{{ t.review }}"</p>
+        <h6 class="fw-bold mt-3">— {{ t.name }}</h6>
+        <small class="text-muted">{{ t.created_at|date:"F j, Y, g:i a" }}</small>
+      </div>
+    </div>
+    {% empty %}
+      <p class="text-center fs-5 text-secondary">No user reviews yet. Be the first to add one! 🚀</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Review Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 border-0 shadow-lg">
+      <div class="modal-header bg-gradient text-white rounded-top p-3">
+        <h5 class="modal-title fw-bold" id="reviewModalLabel">✍️ Write a Review</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form method="post" action="{% url 'testimonials' %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label fw-bold">👤 Your Name</label>
+            {{ form.name }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">💬 Your Review</label>
+            {{ form.review }}
+          </div>
+          <button type="submit" class="btn btn-gradient w-100 fw-bold py-2">🚀 Submit Review</button>
+        </form>
       </div>
     </div>
   </div>
@@ -81,21 +126,37 @@
   animation: bounce 2s infinite;
 }
 
-/* Bounce Effect for Icons */
+/* Bounce Effect */
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
 
-/* Fade-in Animation for Cards */
+/* Fade-in Animation */
 @keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
 .testimonial-card:nth-child(1) { animation-delay: 0.2s; }
 .testimonial-card:nth-child(2) { animation-delay: 0.4s; }
 .testimonial-card:nth-child(3) { animation-delay: 0.6s; }
+
+/* Gradient Button */
+.btn-gradient {
+  background: linear-gradient(90deg, #ff512f, #f7971e, #ffd200);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+.btn-gradient:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Modal Header Gradient */
+.modal-header.bg-gradient {
+  background: linear-gradient(90deg, #ff512f, #f7971e, #ffd200);
+  color: white;
+}
 </style>
 {% endblock %}

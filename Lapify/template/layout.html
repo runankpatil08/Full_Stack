@@ -167,18 +167,20 @@
             <i class="bi bi-box-arrow-in-right me-1"></i> Login
           </a>
         {% endif %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle px-3" href="#" id="moreDropdown" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
-            📂 More
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end stylish-dropdown" aria-labelledby="moreDropdown">
-            <li><a class="dropdown-item" href="{% url 'privacy' %}">🔒 Privacy Policy</a></li>
-            <li><a class="dropdown-item" href="{% url 'terms' %}">📜 Terms & Conditions</a></li>
-            <li><a class="dropdown-item" href="{% url 'testimonials' %}">🌟 Testimonials</a></li>
-          </ul>
-        </li>
-        <button id="theme-toggle" class="btn btn-sm btn-outline-light ms-3">🌙 Dark Mode</button>
+       <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle px-3" href="#" id="moreDropdown" role="button"
+     data-bs-toggle="dropdown" aria-expanded="false">
+    <!-- Hamburger Icon -->
+    <span style="font-size: 24px;">☰</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end stylish-dropdown" aria-labelledby="moreDropdown">
+    <li><a class="dropdown-item" href="{% url 'privacy' %}">🔒 Privacy Policy</a></li>
+    <li><a class="dropdown-item" href="{% url 'terms' %}">📜 Terms & Conditions</a></li>
+    <li><a class="dropdown-item" href="{% url 'testimonials' %}">🌟 Customer Review</a></li>
+  </ul>
+</li>
+
+        <button id="theme-toggle" class="btn btn-sm btn-outline-light ms-3">🌙</button>
       </div>
     </div>
   </div>
@@ -215,7 +217,7 @@
         <ul class="list-unstyled">
           <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
           <li><a href="{% url 'terms' %}">Terms & Conditions</a></li>
-          <li><a href="{% url 'career' %}">Careers</a></li>
+          <li><a href="{% url 'career' %}">Join Our Team</a></li>
         </ul>
       </div>
       <div class="col-md-4 mb-3">
@@ -253,18 +255,18 @@
 
   if (localStorage.getItem("theme") === "dark") {
     body.classList.add("dark-mode");
-    toggleBtn.textContent = "☀️ Light Mode";
+    toggleBtn.textContent = "☀️";
     toggleBtn.classList.replace("btn-outline-light","btn-outline-warning");
   }
 
   toggleBtn.addEventListener("click", () => {
     body.classList.toggle("dark-mode");
     if(body.classList.contains("dark-mode")) {
-      toggleBtn.textContent = "☀️ Light Mode";
+      toggleBtn.textContent = "☀️";
       toggleBtn.classList.replace("btn-outline-light","btn-outline-warning");
       localStorage.setItem("theme","dark");
     } else {
-      toggleBtn.textContent = "🌙 Dark Mode";
+      toggleBtn.textContent = "🌙";
       toggleBtn.classList.replace("btn-outline-warning","btn-outline-light");
       localStorage.setItem("theme","light");
     }

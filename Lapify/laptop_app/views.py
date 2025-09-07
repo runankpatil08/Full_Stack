@@ -3,11 +3,9 @@ from .forms import LaptopForm
 from .models import Laptop
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
 from django.core.mail import send_mail
-
-
-
+from .models import Testimonial
+from .forms import TestimonialForm
 
 
 def home_view(request):
@@ -22,6 +20,7 @@ def home_view(request):
     return render(request, template_name, context)
 
 
+# ✅ New Static Pages
 def faq_view(request):
     template_name='laptop_app/faq.html'
     context={}
@@ -31,9 +30,6 @@ def contact_view(request):
     template_name='laptop_app/contact.html'
     context={}
     return render(request, template_name, context)
-
-
-# ✅ New Static Pages
 
 def career_view(request):
     template_name = 'laptop_app/career.html'
@@ -49,9 +45,32 @@ def terms_view(request):
     return render(request, template_name)
 
 
+
 def testimonials_view(request):
-    template_name = 'laptop_app/testimonials.html'
-    return render(request, template_name)
+    testimonials = Testimonial.objects.all().order_by('-created_at')
+
+    if request.method == "POST":
+        form = TestimonialForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('testimonials')
+    else:
+        form = TestimonialForm()
+
+    context = {
+        "testimonials": testimonials,
+        "form": form,
+    }
+    return render(request, 'laptop_app/testimonials.html', context)
+
+
+def shop_stock_user_see_view(request):
+    laptop = Laptop.objects.all()
+    template_name="laptop_app/showStockUser.html"
+    context={'laptop':laptop}
+    return render(request, template_name, context)
+
+
 
 @login_required
 def add_view(request):
