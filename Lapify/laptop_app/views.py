@@ -65,10 +65,16 @@ def testimonials_view(request):
 
 
 def shop_stock_user_see_view(request):
-    laptop = Laptop.objects.all()
-    template_name="laptop_app/showStockUser.html"
-    context={'laptop':laptop}
+    query = request.GET.get("q")  # get search query from request
+    if query:
+        laptop = Laptop.objects.filter(company__icontains=query)  # search by brand/company name
+    else:
+        laptop = Laptop.objects.all()
+
+    template_name = "laptop_app/showStockUser.html"
+    context = {"laptop": laptop}
     return render(request, template_name, context)
+
 
 
 
