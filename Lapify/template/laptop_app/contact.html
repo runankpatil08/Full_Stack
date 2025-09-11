@@ -1,0 +1,124 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Contact Us - Laptop Store</title>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="text-center text-white d-flex align-items-center justify-content-center"
+         style="min-height: 25vh; background: linear-gradient(135deg, #6c63ff, #00c6ff, #ff6ec7); animation: gradientBG 12s infinite alternate;">
+  <div>
+    <h1 style="font-size: 3rem; font-weight: 700; font-family: 'Poppins', sans-serif; text-shadow: 2px 2px 8px rgba(0,0,0,0.3);">
+      ✨ Contact Us
+    </h1>
+  </div>
+</section>
+
+<!-- Contact Details -->
+<div class="container my-5">   <!-- Added spacing -->
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card glass-card shadow p-4">
+        <h3 class="mb-3 text-gradient">📞 Get in Touch</h3>
+        <p><strong>📍 Address:</strong> 123 Tech Street, Bangalore, India</p>
+        <p><strong>📧 Email:</strong> support@lapify.com</p>
+        <p><strong>📱 Phone:</strong> +91 9988776633</p>
+
+        <div class="mt-3 d-flex gap-2 flex-wrap">
+          <a href="#" class="btn social-btn facebook">🌐 Facebook</a>
+          <a href="#" class="btn social-btn twitter">🐦 Twitter</a>
+          <a href="#" class="btn social-btn instagram">📸 Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Map Section -->
+<div class="container mb-5">
+  <h3 class="text-center mb-3 text-gradient">📍 Visit Us</h3>
+  <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.109005924188!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c8a29f3f%3A0xa7b8a3bff0d23!2sBangalore%20City!5e0!3m2!1sen!2sin!4v1699999999999!5m2!1sen!2sin"
+      width="600"
+      height="450"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+
+<!-- Styles -->
+<style>
+/* Background gradient animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+section {
+  background-size: 300% 300%;
+}
+
+/* Glassmorphism effect */
+.glass-card {
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.glass-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(90deg, #6c63ff, #00c6ff, #ff6ec7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+/* Inputs */
+.cool-input {
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+.cool-input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+}
+
+/* Button */
+.custom-btn {
+  border-radius: 30px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+.custom-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #6c63ff, #00c6ff);
+  border: none;
+}
+
+/* Social Buttons */
+.social-btn {
+  border-radius: 30px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.social-btn:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+.facebook { background: #3b5998; color: white; }
+.twitter { background: #1da1f2; color: white; }
+.instagram { background: #e1306c; color: white; }
+</style>
+
+{% endblock %}

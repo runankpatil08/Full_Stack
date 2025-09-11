@@ -1,0 +1,242 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Available Stock</title>
+{% endblock %}
+
+
+{% block content %}
+<!-- Floating Banner -->
+<div class="floating-banner">
+  <span>
+  🛒 If you want to buy, please visit the shop! &nbsp;&nbsp;
+  </span>
+
+</div>
+
+<style>
+  .floating-banner {
+    position: sticky;
+    top: 56px; /* adjust for navbar height */
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(90deg, #6c63ff, #28a745);
+    color: #fff;
+    padding: 10px 0;
+    z-index: 1050;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .floating-banner span {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1rem;
+    animation: bounceText 12s linear infinite alternate;
+  }
+
+  @keyframes bounceText {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+</style>
+
+
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f8f9fc; /* Clean professional background */
+  }
+
+  /* Card Container */
+  .product-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  }
+
+  /* Image section */
+  .product-image {
+    background: #f9f9f9;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    height: 100%;
+  }
+  .product-image img {
+    max-width: 100%;
+    max-height: 160px;
+    object-fit: contain;
+  }
+
+  /* Details section */
+  .product-details {
+    padding: 20px;
+  }
+  .product-details h5 {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 12px;
+  }
+  .product-details p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 6px;
+  }
+
+  /* Stock Badge */
+  .badge {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+
+  /* Price */
+  .price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #28a745;
+    margin-top: 10px;
+  }
+
+  /* Extra details */
+  .extra-details {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background: #f5f6fa;
+    border-left: 3px solid #6c63ff;
+    border-radius: 6px;
+  }
+
+  /* Toggle button */
+  .toggle-btn {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6c63ff;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+  .toggle-btn:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="container my-5">
+  <!-- Header -->
+  <div class="text-center mb-5">
+    <h2 class="fw-bold text-dark">
+      <i class="bi bi-laptop me-2"></i> Available Laptop Stock
+    </h2>
+    <p class="text-muted">Browse the latest stock availability with details on RAM, storage, and pricing.</p>
+  </div>
+
+  <!-- Search Form -->
+<form method="get" class="d-flex justify-content-center mb-4">
+  <input type="text" name="q" class="form-control w-50 me-2"
+         placeholder="Search by brand name..."
+         value="{{ request.GET.q }}">
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+
+
+ <!-- Product Grid -->
+<div class="row">
+  {% if laptop %}
+    {% for lap in laptop %}
+      <div class="col-md-6">
+        <div class="product-card">
+          <div class="row g-0 align-items-center">
+
+            <!-- Image -->
+            <div class="col-md-4 col-sm-4 col-12 p-3">
+              <div class="product-image">
+                {% if lap.image %}
+                  <img src="{{ lap.image.url }}" alt="{{ lap.name }}">
+                {% else %}
+                  <img src="https://via.placeholder.com/180" alt="No image">
+                {% endif %}
+              </div>
+            </div>
+
+            <!-- Details -->
+            <div class="col-md-8 col-sm-8 col-12">
+              <div class="product-details">
+                <h5>{{ lap.company }}</h5>
+                <p><strong>RAM:</strong> {{ lap.ram }} GB</p>
+                <p><strong>Storage:</strong> {{ lap.storage }} GB</p>
+                <p><strong>Color:</strong> {{ lap.color }}</p>
+
+                {% if lap.stock > 0 %}
+                  <span class="badge bg-success">In Stock</span>
+                {% else %}
+                  <span class="badge bg-danger">Out of Stock</span>
+                {% endif %}
+
+                <p class="price">₹{{ lap.price }}</p>
+
+                <!-- Hidden details -->
+                <div class="extra-details">
+                  <p><strong>Processor:</strong> Intel Core i5</p>
+                  <p><strong>Graphics:</strong> NVIDIA GTX 1650</p>
+                  <p><strong>Screen Size:</strong> 15.6 inch</p>
+                  <p><strong>Battery:</strong> 5000mAh</p>
+                </div>
+
+                <!-- Toggle -->
+                <button class="toggle-btn">Show More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="col-12">
+      <p class="text-center text-danger fw-bold mt-4">
+        ❌ No laptops found for your search.
+      </p>
+    </div>
+  {% endif %}
+</div>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".toggle-btn");
+    buttons.forEach(btn => {
+      btn.addEventListener("click", function () {
+        const details = this.previousElementSibling;
+        if (details.style.display === "none" || details.style.display === "") {
+          details.style.display = "block";
+          this.textContent = "Show Less";
+        } else {
+          details.style.display = "none";
+          this.textContent = "Show More";
+        }
+      });
+    });
+  });
+</script>
+
+{% endblock %}
