@@ -17,7 +17,7 @@ def register(request):
                 'Test Email',
                 f'Hello {user.username},\n\n you have Successfully Registered on LapiFy ',
                 'runankpatil08@gmail.com',  # From
-                ['runankpatil2001@gmail.com'],  # To
+                [user.email],  # To
                 fail_silently=False,
             )
 
@@ -46,7 +46,7 @@ def login_view(request):
                 subject='Login Alert - LapiFy',
                 message=f'Hello {user.username},\n\n you have Successfully Log In if this is not you secure your account ',
                 from_email='runankpatil08@gmail.com',   # Replace with your EMAIL_HOST_USER
-                recipient_list=['runankpatil2001@gmail.com'],  # Can also be [user.email]
+                recipient_list=[user.email],  # Can also be [user.email]
                 fail_silently=False,
             )
 

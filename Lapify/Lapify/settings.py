@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-wlq^o0^%k6*n8pytpgwzm2r$(nm9a+b9^8^ym9v)0#u-i+kqas
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -63,7 +63,7 @@ ROOT_URLCONF = "Lapify.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['template'],
+        "DIRS": [ os.path.join(BASE_DIR,'template') ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
